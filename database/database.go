@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/Thalisonh/go-medium/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -35,6 +36,8 @@ func StartDB(
 
 	fmt.Println("Connected")
 
+	migrate(database)
+
 	db = database
 }
 
@@ -50,4 +53,14 @@ func GetDb() *gorm.DB {
 	}
 
 	return db
+}
+
+func migrate(db *gorm.DB) {
+	fmt.Println("Start Migration")
+
+	errBook := db.AutoMigrate(&model.Book{})
+	if errBook != nil {
+		fmt.Println("AutoMigrate Books: ", errBook.Error())
+		return
+	}
 }
