@@ -1,17 +1,19 @@
 package main
 
 import (
-	"net/http"
+	"fmt"
 
-	"github.com/gin-gonic/gin"
+	"github.com/Thalisonh/go-medium/server"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	r := gin.Default()
-	r.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "Hello World!",
-		})
-	})
-	r.Run()
+	errDotEnv := godotenv.Load()
+
+	if errDotEnv != nil {
+		fmt.Println("Error loading .env files")
+	}
+
+	s := server.Init()
+	s.Run()
 }
