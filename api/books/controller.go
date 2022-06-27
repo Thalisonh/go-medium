@@ -34,5 +34,5 @@ func (s *ControllerBook) CreateBook(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, book)
+	c.JSON(http.StatusCreated, book)
 }
