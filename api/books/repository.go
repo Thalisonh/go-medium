@@ -7,7 +7,7 @@ import (
 
 type IBookRepository interface {
 	CreateBook(book *model.Book) (*model.Book, error)
-	GetBooks(userId int64) (*[]model.Book, error)
+	GetBooks() (*[]model.Book, error)
 }
 
 type RepositoryBook struct {
@@ -22,7 +22,7 @@ func (r *RepositoryBook) CreateBook(book *model.Book) (*model.Book, error) {
 	return book, r.db.Create(&book).Error
 }
 
-func (r *RepositoryBook) GetBooks(userId int64) (*[]model.Book, error) {
+func (r *RepositoryBook) GetBooks() (*[]model.Book, error) {
 	var books []model.Book
 	return &books, r.db.Find(&books).Error
 }

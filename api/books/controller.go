@@ -36,3 +36,15 @@ func (s *ControllerBook) CreateBook(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, book)
 }
+
+func (s *ControllerBook) ShowBooks(c *gin.Context) {
+	books, err := s.repository.GetBooks()
+
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"message": err.Error(),
+		})
+	}
+
+	c.JSON(http.StatusOK, &books)
+}

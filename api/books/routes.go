@@ -10,4 +10,5 @@ func Router(allGroup *gin.RouterGroup) {
 	c := NewBookController(r)
 
 	allGroup.POST("", c.CreateBook)
+	allGroup.GET("", c.ShowBooks)
 }
